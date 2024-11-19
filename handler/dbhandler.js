@@ -1,5 +1,3 @@
-
-
 // Connect to MongoDB
 async function connectDB() {
     try {
