@@ -1,0 +1,139 @@
+html, body {
+    
+    scroll-behavior: horizontal;
+    margin: 0; 
+    padding: 0; 
+    height: 100%; 
+    overflow-x: hidden;
+}
+
+body{
+    background-color: black;
+}
+
+
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: aliceblue;
+}
+.logo {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color:gray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    text-align: center;
+}
+
+.logo span {
+    padding: 5px;
+}
+
+header{
+    text-align: center;
+    font-size: 40px;
+    font-style: italic;
+    color: aliceblue;
+    padding: 2%;
+}
+.calendar {
+    display: flex;
+    flex-direction: vertical; 
+    gap: 70px; 
+}
+
+.luke {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 250px; 
+    height: 250px; 
+    border: 2px solid rgb(255, 255, 255);
+    background-color: black;
+    color: aliceblue;
+    border-radius: 5px;
+    padding: 10px; 
+    font-size: 30px; 
+    font-style: italic, impact;
+    box-sizing: border-box; 
+    margin-top: 30px;
+    margin: 30px auto;
+}
+
+.luke:hover {
+    background-color: gray;
+    transform: scale(1.2); 
+}
+
+.luke:focus {
+    outline: 2px solid aliceblue; 
+}
+
+.gray{
+    background-color: gray;
+    margin: 50px;
+    border-radius: 10px;
+}
+
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px; 
+    height: 600px; 
+    z-index: 999; 
+    background-color: black;
+    color: aliceblue;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    border: 4px solid white;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.5); 
+}
+
+.popup .number {
+    position: fixed;
+    font-size: 150px;
+    font-weight: bold;
+    margin-bottom: 400px;
+    text-align: center;
+}
+
+.popup .details {
+    position: fixed;
+    font-size: 16px;
+    color: #d3cfcf;
+    text-align: center;
+    margin-bottom: 30%;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 998;
+}
+
+footer{
+    color: aliceblue;
+    margin: 20px;
+}
+
+
+
