@@ -6,7 +6,7 @@ const routes = require('./routes/defaultroutes');
 
 app.set("views", path.join(__dirname, "views"))
 app.set("view engine", 'ejs');
-// Middleware to handle form data and JSON payloads
+
 
 app.use(express.static(path.join(__dirname, 'public')));
 
