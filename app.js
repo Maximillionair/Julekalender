@@ -1,6 +1,7 @@
 const express = require("express")
 const path = require("path")
 const app = express()
+const parse = require("body-parser")
 const routes = require('./routes/defaultroutes');
 
 
