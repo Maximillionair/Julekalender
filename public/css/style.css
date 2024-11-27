@@ -1,5 +1,4 @@
 html, body {
-    
     scroll-behavior: horizontal;
     margin: 0; 
     padding: 0; 
@@ -136,5 +135,27 @@ footer{
     text-align: center;
 }
 
+@media (max-width: 600px) {
+    .popup {
+        width: 80%;
+        height: 60%;
+        border-radius: 10px;
+        font-size: 30px;
+    }
 
+    .popup .number {
+        font-size: 100px;
+        margin-bottom: 200px;
+    }
+
+    .popup .details {
+        font-size: 14px;
+        margin-bottom: 20%;
+    }
+    
+    footer {
+        font-size: 14px;
+        margin: 10px;
+    }
+}
 
