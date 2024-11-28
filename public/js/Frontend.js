@@ -43,136 +43,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let overlay = null;
     let popup = null;
+    let currentIndex = 0;
+    let touchStartX = null;
+    let touchStartY = null;
 
     // Function to check if a button is openable based on today's date
-  /*  const isLukeOpenable = (lukeIndex) => {
+    /* const isLukeOpenable = (lukeIndex) => {
         const today = new Date().toISOString().split("T")[0]; // Get current date in YYYY-MM-DD format
         return today >= lukeDates[lukeIndex]; // Compare with the respective date
     }; */
-
-    // Loop through buttons and add event listeners
-    buttons.forEach((button, index) => {
-        // Set button content and state based on date logic
-       /* if (isLukeOpenable(index)) {
-            button.innerHTML = `<span>▶️</span> ${button.innerText}`; // Mark as openable
-            button.disabled = false; // Enable the button
-        } else {
-            button.innerHTML = `<span style="color: red;">🔒</span> ${button.innerText}`; // Mark as locked
-            button.disabled = false; // Keep the button clickable but styled as locked
-        } */
-
-        // Add click event listener to show the popup
-        button.addEventListener("click", (event) => {       
-           /* if (!isLukeOpenable(index)) {
-                event.preventDefault(); // Prevent action if "luke" is not openable
-                alert("This luke is locked until " + lukeDates[index]); // Inform the user
-                return;
-            } */
-
-            // Close any open popup before opening a new one
-            closePopup();
-
-            // Create and display the overlay
-            overlay = document.createElement("div");
-            overlay.className = "overlay";
-            document.body.appendChild(overlay);
-
-            // Create and display the popup
-            popup = document.createElement("div");
-            popup.className = "popup";
-
-            // Add number and details
-            const numberDisplay = document.createElement("div");
-            numberDisplay.className = "number";
-            numberDisplay.innerText = button.innerText;
-
-            const detailText = document.createElement("div");
-            detailText.className = "details";
-            detailText.innerText = details[index] || "No details available";
-
-            // Append elements to popup
-            popup.appendChild(numberDisplay);
-            popup.appendChild(detailText);
-
-            // Add input fields and submit button
-const inputContainer = document.createElement("div");
-inputContainer.className = "input-container";
-
-const nameInput = document.createElement("input");
-nameInput.type = "text";
-nameInput.placeholder = "Enter your message";
-nameInput.className = "popup-input";
-
-const emailInput = document.createElement("input");
-emailInput.type = "email";
-emailInput.placeholder = "Enter your email";
-emailInput.className = "popup-input";
-
-const submitButton = document.createElement("button");
-submitButton.type = "button";
-submitButton.innerText = "Submit";
-submitButton.className = "popup-submit";
-// Add event listener to the submit button
-submitButton.addEventListener("click", () => {
-    const nameValue = nameInput.value.trim();
-    const emailValue = emailInput.value.trim();
-
-    // Validate the inputs
-    if (!nameValue || !emailValue.includes("@")) {
-        alert("Please provide a valid name and email with an '@'.");
-        return;
-    }
-
-    // Prepare data to send to the backend
-    const formData = {
-        name: nameValue,
-        email: emailValue,
-    };
-
-    // Send data to the backend API
-    fetch("http://localhost:5000/submit", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-    })
-        .then((response) => {
-            if (!response.ok) {
-                throw new Error("Failed to submit data.");
-            }
-            return response.json();
-        })
-        .then((data) => {
-            alert("Submission successful!");
-            closePopup();
-        })
-        .catch((error) => {
-            console.error(error);
-            alert("An error occurred. Please try again later.");
-        });
-});
-
-// Append inputs and button to the container
-inputContainer.appendChild(nameInput);
-inputContainer.appendChild(emailInput);
-inputContainer.appendChild(submitButton);
-
-// Append inputs and button to the container
-inputContainer.appendChild(nameInput);
-inputContainer.appendChild(emailInput);
-inputContainer.appendChild(submitButton);
-
-// Append the input container to the popup
-popup.appendChild(inputContainer);
-
-
-            document.body.appendChild(popup);
-
-            // Close popup when clicking on the overlay
-            overlay.addEventListener("click", closePopup);
-        });
-    });
 
     // Function to close the popup
     function closePopup() {
@@ -186,37 +65,160 @@ popup.appendChild(inputContainer);
         }
     }
 
-     // Add touch event listeners for swipe
-     popup.addEventListener('touchstart', function(e) {
-        e.preventDefault(); // Prevent default touch behavior
-        touchStartX = e.touches[0].clientX;
-        touchStartY = e.touches[0].clientY;
-    }, { passive: false });
+    // Function to show popup for a specific index
+    function showPopup(index) {
+        closePopup();
 
-    popup.addEventListener('touchmove', function(e) {
-        e.preventDefault(); // Prevent scrolling while swiping
-    }, { passive: false });
+        // Create and display the overlay
+        overlay = document.createElement("div");
+        overlay.className = "overlay";
+        document.body.appendChild(overlay);
 
-    const touchEndX = e.changedTouches[0].clientX;
-    const touchEndY = e.changedTouches[0].clientY;
-    
-    const deltaX = touchEndX - touchStartX;
-    const deltaY = Math.abs(touchEndY - touchStartY);
-    
-    // Håndter kun horisontale sveip (ignorer hvis vertikal bevegelse er større)
-    if (Math.abs(deltaX) > 50 && deltaY < 100) {
-        if (deltaX > 0 && currentIndex > 0) {
-            // Sveip til høyre - gå til forrige
-            currentIndex--;
-            showPopup(currentIndex);
-        } else if (deltaX < 0 && currentIndex < buttons.length - 1) {
-            // Sveip til venstre - gå til neste
-            currentIndex++;
-            showPopup(currentIndex);
-        }
+        // Create and display the popup
+        popup = document.createElement("div");
+        popup.className = "popup";
+
+        // Add number and details
+        const numberDisplay = document.createElement("div");
+        numberDisplay.className = "number";
+        numberDisplay.innerText = buttons[index].innerText;
+
+        const detailText = document.createElement("div");
+        detailText.className = "details";
+        detailText.innerText = details[index] || "No details available";
+
+        // Append elements to popup
+        popup.appendChild(numberDisplay);
+        popup.appendChild(detailText);
+
+        // Add input fields and submit button
+        const inputContainer = document.createElement("div");
+        inputContainer.className = "input-container";
+
+        const nameInput = document.createElement("input");
+        nameInput.type = "text";
+        nameInput.placeholder = "Enter your message";
+        nameInput.className = "popup-input";
+
+        const emailInput = document.createElement("input");
+        emailInput.type = "email";
+        emailInput.placeholder = "Enter your email";
+        emailInput.className = "popup-input";
+
+        const submitButton = document.createElement("button");
+        submitButton.type = "button";
+        submitButton.innerText = "Submit";
+        submitButton.className = "popup-submit";
+
+        // Add event listener to the submit button
+        submitButton.addEventListener("click", () => {
+            const nameValue = nameInput.value.trim();
+            const emailValue = emailInput.value.trim();
+
+            // Validate the inputs
+            if (!nameValue || !emailValue.includes("@")) {
+                alert("Please provide a valid name and email with an '@'.");
+                return;
+            }
+
+            // Prepare data to send to the backend
+            const formData = {
+                name: nameValue,
+                email: emailValue,
+            };
+
+            // Send data to the backend API
+            fetch("http://localhost:5000/submit", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(formData),
+            })
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error("Failed to submit data.");
+                    }
+                    return response.json();
+                })
+                .then((data) => {
+                    alert("Submission successful!");
+                    closePopup();
+                })
+                .catch((error) => {
+                    console.error(error);
+                    alert("An error occurred. Please try again later.");
+                });
+        });
+
+        // Append inputs and button to the container
+        inputContainer.appendChild(nameInput);
+        inputContainer.appendChild(emailInput);
+        inputContainer.appendChild(submitButton);
+
+        // Append the input container to the popup
+        popup.appendChild(inputContainer);
+
+        // Add touch event listeners for swipe
+        popup.addEventListener("touchstart", function (e) {
+            e.preventDefault(); // Prevent default touch behavior
+            touchStartX = e.touches[0].clientX;
+            touchStartY = e.touches[0].clientY;
+        }, { passive: false });
+
+        popup.addEventListener("touchmove", function (e) {
+            e.preventDefault(); // Prevent scrolling while swiping
+        }, { passive: false });
+
+        popup.addEventListener("touchend", function (e) {
+            const touchEndX = e.changedTouches[0].clientX;
+            const touchEndY = e.changedTouches[0].clientY;
+
+            const deltaX = touchEndX - touchStartX;
+            const deltaY = Math.abs(touchEndY - touchStartY);
+
+            // Handle only horizontal swipes (ignore if vertical movement is larger)
+            if (Math.abs(deltaX) > 50 && deltaY < 100) {
+                if (deltaX > 0 && index > 0) {
+                    // Swipe right - go to previous
+                    showPopup(index - 1);
+                } else if (deltaX < 0 && index < buttons.length - 1) {
+                    // Swipe left - go to next
+                    showPopup(index + 1);
+                }
+            }
+            // Reset touch coordinates
+            touchStartX = null;
+            touchStartY = null;
+        });
+
+        document.body.appendChild(popup);
+
+        // Close popup when clicking on the overlay
+        overlay.addEventListener("click", closePopup);
     }
-     // Tilbakestill berøringskoordinater
-     touchStartX = null;
-     touchStartY = null;
- });
 
+    // Loop through buttons and add event listeners
+    buttons.forEach((button, index) => {
+        /* Set button content and state based on date logic
+        if (isLukeOpenable(index)) {
+            button.innerHTML = `<span>▶️</span> ${button.innerText}`; // Mark as openable
+            button.disabled = false; // Enable the button
+        } else {
+            button.innerHTML = `<span style="color: red;">🔒</span> ${button.innerText}`; // Mark as locked
+            button.disabled = false; // Keep the button clickable but styled as locked
+        } */
+
+        // Add click event listener to show the popup
+        button.addEventListener("click", (event) => {
+            /* if (!isLukeOpenable(index)) {
+                event.preventDefault(); // Prevent action if "luke" is not openable
+                alert("This luke is locked until " + lukeDates[index]); // Inform the user
+                return;
+            } */
+
+            currentIndex = index;
+            showPopup(index);
+        });
+    });
+});
