@@ -17,7 +17,7 @@ app.use(express.urlencoded({ extended: true })); // To handle URL-encoded data
 app.use(routes);
 
 
-// Start the server on port 3000
+// Start the server on port 3100
 const PORT = process.env.PORT || 3100;
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`)
