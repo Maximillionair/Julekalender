@@ -184,6 +184,12 @@ font-style: bold;
         font-size: 14px;
         margin-bottom: 20%;
     }
+
+    .calendar {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
     
     footer {
         font-size: 14px;
