@@ -50,6 +50,7 @@ font-style: italic;
 color: rgb(194, 52, 12);
 padding: 1%;
 font-family: Georgia, Times, 'Times New Roman', serif;
+text-shadow: 3px 1px black;
 }
 .calendar {
 display: flex;
@@ -76,6 +77,11 @@ font-style: italic, impact;
 box-sizing: border-box; 
 margin-top: 10px;
 margin: 10px auto;
+text-shadow: 
+    -1px -1px 0 black, 
+    1px -1px 0 black,  
+    -1px 1px 0 black,  
+    1px 1px 0 black;
 }
 
 .luke:hover {
