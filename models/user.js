@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
     email: {
-        type: string,
+        type: String,
         required: true,
         validate: {
             validator: function (v) {
@@ -17,7 +17,7 @@ const userSchema = new mongoose.Schema({
     //     minlength: [6, "password must be 6 characters long"]
     // }
     message: {
-        type: string,
+        type: String,
         required: true
     }
 });
