@@ -195,10 +195,10 @@ document.addEventListener("DOMContentLoaded", () => {
             // Handle only horizontal swipes (ignore if vertical movement is larger)
             if (Math.abs(deltaX) > 50 && deltaY < 100) {
                 if (deltaX > 0 && index > 0) {
-                    // Swipe right - go to previous
+                    // right = previous date
                     showPopup(index - 1);
                 } else if (deltaX < 0 && index < buttons.length - 1) {
-                    // Swipe left - go to next
+                    // left = next date
                     showPopup(index + 1);
                 }
             }
