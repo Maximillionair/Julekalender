@@ -1,3 +1,6 @@
+const mongoose = require('mongoose')
+const User = require('./user')
+
 document.addEventListener("DOMContentLoaded", () => {
     const buttons = document.querySelectorAll(".luke");
 
@@ -120,6 +123,17 @@ document.addEventListener("DOMContentLoaded", () => {
                 alert("Please provide a valid name and email with an '@'.");
                 return;
             }
+
+            async function userSubmit() {
+                try {
+                    const user = await User.create({
+                        answer: nameValue,
+                        email: emailValue
+                    })
+                } catch (e) {
+                    console.log(e.message);
+                };
+            };
 
             // Prepare data to send to the backend
             const formData = {

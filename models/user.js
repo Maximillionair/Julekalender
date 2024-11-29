@@ -4,7 +4,12 @@ const userSchema = new mongoose.Schema({
     email: {
         type: string,
         required: true,
-        match: [/.+\@.+\..+/, 'Please use a valid email address']
+        validate: {
+            validator: function (v) {
+                return /@afk/.test(v); // Checks if the email contains '@afk'
+              },
+              message: props => `${props.value} is not a valid email. It must contain "@afk".`
+        }
     },
     // password: {
     //     type: string,
