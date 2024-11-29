@@ -11,7 +11,6 @@ html, body {
     position: relative; 
 }
 
-
 body{
 background-color: black;
 }
@@ -22,6 +21,7 @@ align-items: center;
 justify-content: center;
 color: aliceblue
 }
+
 .logo {
 position: fixed;
 top: 10px;
@@ -51,11 +51,11 @@ color: rgb(194, 52, 12);
 padding: 1%;
 font-family: Georgia, Times, 'Times New Roman', serif;
 }
+
 .calendar {
 display: flex;
 flex-direction: vertical; 
 gap: 10px; 
-
 }
 
 .luke {
@@ -86,7 +86,6 @@ transform: scale(1.2);
 .luke:focus {
 outline: 2px solid aliceblue; 
 }
-
 
 .luke.closed::after {
 content: "🔒";
@@ -166,7 +165,6 @@ font-size: 20px;
 font-style: bold;
 }
 
-
 @media (max-width: 600px) {
     .popup {
         width: 80%;
@@ -196,4 +194,3 @@ font-style: bold;
         margin: 10px;
     }
 }
-
