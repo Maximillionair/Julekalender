@@ -1,5 +1,5 @@
-const mongoose = require('mongoose')
-const User = require('./user')
+// const mongoose = require('mongoose')
+// const User = require('./user')
 
 document.addEventListener("DOMContentLoaded", () => {
     const buttons = document.querySelectorAll(".luke");
@@ -115,29 +115,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Add event listener to the submit button
         submitButton.addEventListener("click", () => {
-            const nameValue = nameInput.value.trim();
+            const messageValue = nameInput.value.trim();
             const emailValue = emailInput.value.trim();
 
             // Validate the inputs
-            if (!nameValue || !emailValue.includes("@")) {
+            if (!messageValue || !emailValue.includes("@")) {
                 alert("Please provide a valid name and email with an '@'.");
                 return;
             }
 
-            async function userSubmit() {
-                try {
-                    const user = await User.create({
-                        answer: nameValue,
-                        email: emailValue
-                    })
-                } catch (e) {
-                    console.log(e.message);
-                };
-            };
+            // async function userSubmit() {
+            //     try {
+            //         const user = await User.create({
+            //             answer: nameValue,
+            //             email: emailValue
+            //         })
+            //         console.log('laget')
+            //     } catch (e) {
+            //         console.log(e.message);
+            //     };
+            // };
 
             // Prepare data to send to the backend
             const formData = {
-                name: nameValue,
+                message: messageValue,
                 email: emailValue,
             };
 

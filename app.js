@@ -3,6 +3,7 @@ const path = require("path")
 const app = express()
 const parse = require("body-parser")
 const routes = require('./routes/defaultroutes');
+const {connectDB} = require('./handler/dbhandler');
 
 
 app.set("views", path.join(__dirname, "views"))
@@ -21,5 +22,6 @@ app.use(routes);
 const PORT = process.env.PORT || 3100;
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`)
+  connectDB()
 });
 console.log('hi')
