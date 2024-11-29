@@ -128,7 +128,7 @@ document.addEventListener("DOMContentLoaded", () => {
             };
 
             // Send data to the backend API
-            fetch("http://localhost:5000/submit", {
+            fetch("http://localhost:3100/submit", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
