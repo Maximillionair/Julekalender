@@ -161,7 +161,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     closePopup();
                 })
                 .catch((error) => {
-                    console.error(error);
+                    console.log(error);
                     alert("An error occurred. Please try again later.");
                 });
         });
